@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
+import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const CircleButton = styled.button`
   background: #38d9a9;
   &:hover {
     background: #63e6be;
+  }
+  &:active {
+    background: #20c997;
   }
   z-index: 5;
   cursor: pointer;
@@ -22,16 +26,82 @@ const CircleButton = styled.button`
   border-radius: 50%;
   border: none;
   outline: none;
+
+  transition: 0.125s all ease-in;
+  ${props =>
+    props.open &&
+    css`
+      background: #ff6b6b;
+      &:hover {
+        background: #ff8787;
+      }
+      &:active {
+        background: #fa5252;
+      }
+      transform: rotate(45deg);
+    `}
 `;
 
+const InsertFormPositioner = styled.div``;
+
+const InsertForm = styled.form``;
+
+const Input = styled.input``;
+
 function TodoCreate() {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
+
+  const dispatch = useTodoDispatch();
+  const nextId = useTodoNextId();
+
+  const onToggle = () => setOpen(!open);
+  const onChange = e => {
+    setText(e.target.value);
+    setCategory(e.target.value);
+    setPrice(e.target.value);
+  };
+
+  const onSubmit = e => {
+    e.preventDefault(); // 새로고침 방지
+    dispatch({
+      type: 'CREATE',
+      todo: {
+        id: nextId.current,
+        text: text,
+        category: category,
+        price: price,
+      },
+    });
+    setText('');
+    setCategory('');
+    setPrice('');
+    setOpen(false);
+    nextId.current += 1;
+  };
+
   return (
     <>
-      <CircleButton>
+      {open && (
+        <InsertFormPositioner>
+          <InsertForm onSubmit={onSubmit}>
+            <Input
+              autoFocus
+              onChange={onChange}
+              text={text}
+              category={category}
+              price={price}
+            ></Input>
+          </InsertForm>
+        </InsertFormPositioner>
+      )}
+      <CircleButton onClick={onToggle} open={open}>
         <MdAdd />
       </CircleButton>
     </>
   );
 }
 
-export default TodoCreate;
+export default React.memo(TodoCreate);

@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDelete } from 'react-icons/md';
 import { RiPencilFill } from 'react-icons/ri';
+import { useTodoDispatch } from '../TodoContext';
 
 const TodoItemBlock = styled.div`
   display: flex;
@@ -51,6 +52,9 @@ const Update = styled.div`
 `;
 
 function TodoItem({ id, category, text, price }) {
+  const dispatch = useTodoDispatch();
+  const onRemove = () => dispatch({ type: 'REMOVE', id });
+
   return (
     <TodoItemBlock>
       <CategoryBlock>{category}</CategoryBlock>
@@ -59,11 +63,11 @@ function TodoItem({ id, category, text, price }) {
       <Update>
         <RiPencilFill />
       </Update>
-      <Remove>
+      <Remove onClick={onRemove}>
         <MdDelete />
       </Remove>
     </TodoItemBlock>
   );
 }
 
-export default TodoItem;
+export default React.memo(TodoItem);
