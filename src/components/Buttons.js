@@ -46,6 +46,7 @@ const StyledButton = styled.button`
   & + &{
       margin-left: 0.5rem;
   }
+  align-items: center;
 
   /* 크기 */
   ${sizeStyles} 
