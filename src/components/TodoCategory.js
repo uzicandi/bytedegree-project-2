@@ -8,7 +8,7 @@ const TodoCategoryBlock = styled.div`
 
   .category-text {
     font-size: 18px;
-    margin: 15px;
+    margin: 10px;
     margin-left: auto;
   }
 `;

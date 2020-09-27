@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Buttons from './Buttons';
 
 const DarkBackground = styled.div`
   position: fixed;
@@ -28,20 +29,22 @@ const DialogBlock = styled.div`
 `;
 
 const ButtonGroup = styled.div`
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
 `;
 
-//styled.button 넣을까?
-
-function Dialog({ title, children, category, text, price }) {
+function Dialog({ title, children, onConfirm, onCancel, visible }) {
+  if (!visible) return null;
   return (
     <DarkBackground>
       <DialogBlock>
         <h3>{title}</h3>
         {children}
-        <ButtonGroup></ButtonGroup>
+        <ButtonGroup>
+          <Buttons onClick={onCancel}>취소</Buttons>
+          <Buttons onClick={onConfirm}>확인</Buttons>
+        </ButtonGroup>
       </DialogBlock>
     </DarkBackground>
   );

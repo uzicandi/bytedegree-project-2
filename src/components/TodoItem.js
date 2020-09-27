@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MdDelete } from 'react-icons/md';
 import { RiPencilFill } from 'react-icons/ri';
 import { useTodoDispatch } from '../TodoContext';

@@ -6,7 +6,6 @@ import TodoList from './components/TodoList';
 import TodoCategory from './components/TodoCategory';
 import TodoCreate from './components/TodoCreate';
 import { TodoProvider } from './TodoContext';
-import Dialog from './components/Dialog';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,7 +23,6 @@ function App() {
           <TodoCategory />
           <TodoList />
           <TodoCreate />
-          {/* <Dialog>데이터생성</Dialog> */}
         </TodoTemplate>
       </TodoProvider>
     </>

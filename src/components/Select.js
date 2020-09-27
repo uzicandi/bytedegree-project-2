@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTodoState } from '../TodoContext';
 
 const SelectBlock = styled.select`
   width: 50px;
-  font-weight: 700;
+  margin: 10px 0 10px 10px;
 `;
 const Options = styled.option``;
 
 function Select() {
   const todos = useTodoState();
-  const category = todos.map(todo => todo.category);
-  console.log('category : ', category);
+  const [category, setCategory] = useState('');
+  const onChangeCategory = e => {
+    debugger;
+    setCategory(e.target.value);
+  };
+
   return (
-    <SelectBlock>
+    <SelectBlock onChange={onChangeCategory}>
       {todos.map(todo => (
         <Options>{todo.category}</Options>
       ))}

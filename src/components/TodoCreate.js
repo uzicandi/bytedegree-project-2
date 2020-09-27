@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import { useTodoDispatch, useTodoNextId } from '../TodoContext';
+import { useTodoDispatch, useTodoNextId, useTodoState } from '../TodoContext';
 import Dialog from './Dialog';
-import Select from './Select';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -46,28 +45,61 @@ const CircleButton = styled.button`
 
 const InsertFormPositioner = styled.div``;
 
-const InsertForm = styled.form``;
+const InsertForm = styled.form`
+  margin-top: 1rem;
+`;
 
-const Input = styled.input``;
+const InputDiv = styled.div`
+  display: flex;
+  p {
+    font-size: 15px;
+  }
+`;
+
+const Input = styled.input`
+  margin: 10px 0 10px 10px;
+`;
+
+const SelectBlock = styled.select`
+  width: 50px;
+  margin: 10px 0 10px 10px;
+`;
+const Options = styled.option``;
 
 function TodoCreate() {
+  const todos = useTodoState();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(todos[0].category);
   const [price, setPrice] = useState('');
+  const [dialog, setDialog] = useState(false);
+  const onClick = () => {
+    setOpen(!open);
+    setDialog(true);
+  };
+
+  const onCancel = () => {
+    setOpen(!open);
+    setDialog(false);
+  };
 
   const dispatch = useTodoDispatch();
   const nextId = useTodoNextId();
 
-  const onToggle = () => setOpen(!open);
-  const onChange = e => {
-    setText(e.target.value);
+  const onChangeCategory = e => {
     setCategory(e.target.value);
-    setPrice(e.target.value);
+  };
+  const onChangeText = e => {
+    setText(e.target.value);
+  };
+  const onChangePrice = e => {
+    setPrice(Number(e.target.value));
   };
 
-  const onSubmit = e => {
+  const onConfirm = e => {
     e.preventDefault(); // 새로고침 방지
+    setOpen(!open);
+    setDialog(false);
     dispatch({
       type: 'CREATE',
       todo: {
@@ -78,7 +110,7 @@ function TodoCreate() {
       },
     });
     setText('');
-    setCategory('');
+    setCategory(todos[0].category);
     setPrice('');
     setOpen(false);
     nextId.current += 1;
@@ -87,29 +119,35 @@ function TodoCreate() {
   return (
     <>
       {open && (
-        // <InsertFormPositioner>
-        //   <InsertForm onSubmit={onSubmit}>
-        //     <Input
-        //       autoFocus
-        //       onChange={onChange}
-        //       text={text}
-        //       category={category}
-        //       price={price}
-        //     ></Input>
-        //   </InsertForm>
-        // </InsertFormPositioner>
-        <Dialog title="지출 내역 추가하기">
+        <Dialog
+          title="지출 내역 추가하기"
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+          visible={dialog}
+        >
           <InsertFormPositioner>
             <InsertForm>
-              {/* <Select category={category}></Select> */}
-              <Select></Select>
-              <Input text={text}></Input>
-              <Input price={price}></Input>
+              <InputDiv>
+                <p>카테고리 : </p>
+                <SelectBlock onChange={onChangeCategory}>
+                  {todos.map(todo => (
+                    <Options value={todo.category}>{todo.category}</Options>
+                  ))}
+                </SelectBlock>
+              </InputDiv>
+              <InputDiv>
+                <p>내역 : </p>
+                <Input text={text} onChange={onChangeText}></Input>
+              </InputDiv>
+              <InputDiv>
+                <p>가격 : </p>
+                <Input price={price} onChange={onChangePrice}></Input>
+              </InputDiv>
             </InsertForm>
           </InsertFormPositioner>
         </Dialog>
       )}
-      <CircleButton onClick={onToggle} open={open}>
+      <CircleButton onClick={onClick} open={open}>
         <MdAdd />
       </CircleButton>
     </>
