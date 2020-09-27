@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { useTodoDispatch, useTodoNextId } from '../TodoContext';
+import Dialog from './Dialog';
+import Select from './Select';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -85,17 +87,27 @@ function TodoCreate() {
   return (
     <>
       {open && (
-        <InsertFormPositioner>
-          <InsertForm onSubmit={onSubmit}>
-            <Input
-              autoFocus
-              onChange={onChange}
-              text={text}
-              category={category}
-              price={price}
-            ></Input>
-          </InsertForm>
-        </InsertFormPositioner>
+        // <InsertFormPositioner>
+        //   <InsertForm onSubmit={onSubmit}>
+        //     <Input
+        //       autoFocus
+        //       onChange={onChange}
+        //       text={text}
+        //       category={category}
+        //       price={price}
+        //     ></Input>
+        //   </InsertForm>
+        // </InsertFormPositioner>
+        <Dialog title="지출 내역 추가하기">
+          <InsertFormPositioner>
+            <InsertForm>
+              {/* <Select category={category}></Select> */}
+              <Select></Select>
+              <Input text={text}></Input>
+              <Input price={price}></Input>
+            </InsertForm>
+          </InsertFormPositioner>
+        </Dialog>
       )}
       <CircleButton onClick={onToggle} open={open}>
         <MdAdd />

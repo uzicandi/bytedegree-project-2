@@ -32,6 +32,7 @@ const Price = styled.div`
   justify-content: center;
   color: red;
   width: 100px;
+  font-weight: bold;
 `;
 const Remove = styled.div`
   margin: 0 5px 0 5px;

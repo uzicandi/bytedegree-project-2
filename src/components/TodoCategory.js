@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Select from './Select';
 
 const TodoCategoryBlock = styled.div`
   border-bottom: 3px solid #eeeeee;
@@ -15,7 +16,9 @@ const TodoCategoryBlock = styled.div`
 function TodoCategory() {
   return (
     <TodoCategoryBlock>
-      <div className="category-text">카테고리별로 보기 :</div>
+      <div className="category-text">
+        카테고리별로 보기 :<Select></Select>
+      </div>
     </TodoCategoryBlock>
   );
 }
