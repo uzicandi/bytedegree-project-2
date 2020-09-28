@@ -20,8 +20,8 @@ const SelectBlock = styled.select`
 const Options = styled.option``;
 
 function TodoCategory() {
-  const todos = useTodoState();
-  const [category, setCategory] = useState(todos[0].category);
+  const cates = ['식사', '식료품', '교통', '생활', '의료'];
+  const [category, setCategory] = useState(cates[0]);
   const onChangeCategory = e => {
     setCategory(e.target.value);
   };
@@ -30,8 +30,8 @@ function TodoCategory() {
       <div className="category-text">
         카테고리별로 보기 :
         <SelectBlock onChange={onChangeCategory}>
-          {todos.map(todo => (
-            <Options value={todo.category}>{todo.category}</Options>
+          {cates.map(cate => (
+            <Options value={cate}>{cate}</Options>
           ))}
         </SelectBlock>
       </div>
