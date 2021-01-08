@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ocGray5, ocGray9, ocRed8 } from '../constants/style';
+import { useExpenseState } from '../contexts/ExpenseContext';
 
 const HeadWrapper = styled.section`
   color: ${ocGray9};
@@ -23,6 +24,8 @@ const HeadWrapper = styled.section`
 `;
 
 export const ExpensebookHead = () => {
+  const { expenses } = useExpenseState();
+
   return (
     <HeadWrapper>
       <h1>오늘의 지출</h1>

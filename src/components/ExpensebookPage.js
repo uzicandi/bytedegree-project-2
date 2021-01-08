@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { ExpensebookHead } from './ExpensebookHead';
 import { ExpensebookFilter } from './ExpensebookFilter';
-// main?
+import { ExpenseItemList } from './ExpenseItemList';
+import { CreateItemButton } from './CreateItemButton';
+
 const PageBody = styled.main`
   position: relative;
   display: flex;
@@ -21,7 +23,13 @@ export const ExpensebookPage = () => {
       <PageBody>
         <ExpensebookHead />
         <ExpensebookFilter />
+        <ExpenseItemList />
+        <CreateItemButton />
       </PageBody>
     </>
   );
 };
+
+ExpensebookPage.defaultProps = {};
+
+ExpensebookPage.displayName = 'ExpensebookPage';

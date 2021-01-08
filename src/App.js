@@ -2,6 +2,7 @@ import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { ocGray3, ocIndigo8, ocPink6, ocGray7 } from './constants/style';
 import { ExpensebookPage } from './components/ExpensebookPage';
+import { ExpenseProvider } from './contexts/ExpenseContext';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -37,8 +38,10 @@ function App() {
           },
         }}
       >
-        <GlobalStyle />
-        <ExpensebookPage />
+        <ExpenseProvider>
+          <GlobalStyle />
+          <ExpensebookPage />
+        </ExpenseProvider>
       </ThemeProvider>
     </>
   );
