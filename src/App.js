@@ -1,30 +1,48 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import TodoTemplate from './components/TodoTemplate';
-import TodoHead from './components/TodoHead';
-import TodoList from './components/TodoList';
-import TodoCategory from './components/TodoCategory';
-import TodoCreate from './components/TodoCreate';
-import { TodoProvider } from './TodoContext';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ocGray3, ocIndigo8, ocPink6, ocGray7 } from './constants/style';
+import { ExpensebookPage } from './components/ExpensebookPage';
+import { ExpenseProvider } from './contexts/ExpenseContext';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #e9ecef;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+    background: ${ocGray3};
   }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    }
 `;
 
 function App() {
   return (
     <>
-      <TodoProvider>
-        <GlobalStyle />
-        <TodoTemplate>
-          <TodoHead />
-          <TodoCategory />
-          <TodoList />
-          <TodoCreate />
-        </TodoTemplate>
-      </TodoProvider>
+      <ThemeProvider
+        theme={{
+          buttonColors: {
+            indigo: ocIndigo8,
+            pink: ocPink6,
+            gray: ocGray7,
+          },
+        }}
+      >
+        <ExpenseProvider>
+          <GlobalStyle />
+          <ExpensebookPage />
+        </ExpenseProvider>
+      </ThemeProvider>
     </>
   );
 }

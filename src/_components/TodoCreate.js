@@ -118,7 +118,7 @@ function TodoCreate() {
 
   return (
     <>
-      {open && (
+      {
         <Dialog
           title="지출 내역 추가하기"
           onConfirm={onConfirm}
@@ -146,7 +146,7 @@ function TodoCreate() {
             </InsertForm>
           </InsertFormPositioner>
         </Dialog>
-      )}
+      }
       <CircleButton onClick={onClick} open={open}>
         <MdAdd />
       </CircleButton>
