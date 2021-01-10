@@ -28,9 +28,9 @@ const ItemButton = styled.button`
   }
 `;
 
-export const CreateItemButton = () => {
+export const CreateItemButton = props => {
   return (
-    <ItemButton>
+    <ItemButton {...props}>
       <MdAdd size="4rem" color="white" />
     </ItemButton>
   );

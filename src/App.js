@@ -3,6 +3,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { ocGray3, ocIndigo8, ocPink6, ocGray7 } from './constants/style';
 import { ExpensebookPage } from './components/ExpensebookPage';
 import { ExpenseProvider } from './contexts/ExpenseContext';
+import { DialogProvider } from './contexts/DialogContext';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -38,10 +39,12 @@ function App() {
           },
         }}
       >
-        <ExpenseProvider>
-          <GlobalStyle />
-          <ExpensebookPage />
-        </ExpenseProvider>
+        <DialogProvider>
+          <ExpenseProvider>
+            <GlobalStyle />
+            <ExpensebookPage />
+          </ExpenseProvider>
+        </DialogProvider>
       </ThemeProvider>
     </>
   );
