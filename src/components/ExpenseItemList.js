@@ -12,10 +12,6 @@ const ItemListWrapper = styled.section`
 
 export const ExpenseItemList = () => {
   const { expenses, currentFilter, filteredExpenses } = useExpenseState();
-
-  console.log('ex', expenses); // 전체 state
-  console.log('cu', currentFilter);
-  console.log('fil', filteredExpenses);
   return (
     <ItemListWrapper>
       {(currentFilter === 'all' ? expenses : filteredExpenses).map(expense => (

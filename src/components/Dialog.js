@@ -43,8 +43,8 @@ export const Dialog = ({
   cancelText,
   children,
   onCancel,
+  onConfirm,
 }) => {
-  console.log('visible', visible);
   if (!visible) {
     return null;
   }
@@ -57,7 +57,9 @@ export const Dialog = ({
           <Button color="gray" onClick={onCancel}>
             {cancelText}
           </Button>
-          <Button color="pink">{confirmText}</Button>
+          <Button color="pink" onClick={onConfirm}>
+            {confirmText}
+          </Button>
         </ButtonGroup>
       </DialogBody>
     </DimmedBackground>

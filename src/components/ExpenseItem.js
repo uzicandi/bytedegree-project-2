@@ -12,6 +12,7 @@ import {
   ocIndigo8,
 } from '../constants/style';
 import tags from '../constants/tags';
+import { useDialogDispatch } from '../contexts/DialogContext';
 
 const ItemBody = styled.div`
   display: flex;
@@ -81,16 +82,21 @@ const Icon = styled.div`
 `;
 
 export const ExpenseItem = ({ id, category, title, amount }) => {
-  console.log('tags', tags); // tags.js 에 있는 모든 내용
+  //console.log('tags', tags); // tags.js 에 있는 모든 내용
+  const dialogDispatch = useDialogDispatch();
+  const handleEditClick = () =>
+    dialogDispatch({ type: 'OPEN_MODIFY_DIALOG', id });
+  const handleDeleteClick = () =>
+    dialogDispatch({ type: 'OPEN_DELETE_DIALOG', id });
   return (
     <ItemBody>
       <ItemTag tag={category}>{tags[category]}</ItemTag>
       <p className="item-title">{title}</p>
       <strong className="item-amount">-{amount}</strong>
-      <Icon>
+      <Icon onClick={handleEditClick}>
         <MdEdit size="1.5rem" />
       </Icon>
-      <Icon className="danger">
+      <Icon className="danger" onClick={handleDeleteClick}>
         <MdDelete size="1.5rem" />
       </Icon>
     </ItemBody>

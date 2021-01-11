@@ -27,18 +27,51 @@ const InputField = styled.div`
   }
 `;
 
-export const ItemForm = () => {
+export const ItemForm = ({ onChangeField, formValues }) => {
+  const { title, amount, category } = formValues;
   return (
     <Form>
       <InputField>
         <label htmlFor="title">내용</label>
-        <input name="title" type="text" />
+        <input
+          name="title"
+          type="text"
+          value={title}
+          onChange={onChangeField}
+        />
       </InputField>
       <InputField>
-        <label htmlFor="title">금액</label>
+        <label htmlFor="amount">금액</label>
         {/* Note : number타입을 쓰지 않고 숫자만 입력 받을 수 있게 */}
-        <input name="title" type="number" min={0} />
+        <input
+          name="amount"
+          type="number"
+          min={0}
+          value={amount}
+          onChange={onChangeField}
+        />
+      </InputField>
+      <InputField>
+        <label htmlFor="category">카테고리</label>
+        <select name="category" value={category} onChange={onChangeField}>
+          <option value="meal">식사</option>
+          <option value="grocery">식료품</option>
+          <option value="transportation">교통</option>
+          <option value="housekeeping">생활</option>
+          <option value="medical">의료</option>
+        </select>
       </InputField>
     </Form>
   );
 };
+
+ItemForm.defaultProps = {
+  formValues: {
+    title: '',
+    amount: 0,
+    category: 'meal',
+  },
+  onChangeField: () => {},
+};
+
+ItemForm.displayName = 'ItemForm';

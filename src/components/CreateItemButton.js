@@ -6,7 +6,8 @@ import { MdAdd } from 'react-icons/md';
 import { ocCyan8 } from '../constants/style';
 
 const ItemButton = styled.button`
-  position: absolute;
+  position: sticky;
+  left: 20rem;
   right: 1rem;
   bottom: 1rem;
   display: inline-flex;
