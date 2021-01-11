@@ -6,7 +6,8 @@ import { MdAdd } from 'react-icons/md';
 import { ocCyan8 } from '../constants/style';
 
 const ItemButton = styled.button`
-  position: absolute;
+  position: sticky;
+  left: 20rem;
   right: 1rem;
   bottom: 1rem;
   display: inline-flex;
@@ -28,9 +29,9 @@ const ItemButton = styled.button`
   }
 `;
 
-export const CreateItemButton = () => {
+export const CreateItemButton = props => {
   return (
-    <ItemButton>
+    <ItemButton {...props}>
       <MdAdd size="4rem" color="white" />
     </ItemButton>
   );
