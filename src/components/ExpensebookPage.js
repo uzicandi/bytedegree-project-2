@@ -7,6 +7,7 @@ import { CreateItemButton } from './CreateItemButton';
 import { useDialogDispatch } from '../contexts/DialogContext';
 import { CreateItemDialog } from './CreateItemDialog';
 import { ModifyItemDialog } from './ModifyItemDialog';
+import { DeleteItemDialog } from './DeleteItemDialog';
 
 const PageBody = styled.main`
   position: relative;
@@ -24,7 +25,6 @@ export const ExpensebookPage = () => {
   const dialogDispatch = useDialogDispatch();
   const handleCreateButtonClick = () =>
     dialogDispatch({ type: 'OPEN_CREATE_DIALOG' });
-  console.log(dialogDispatch);
   return (
     <>
       <PageBody>
@@ -34,6 +34,7 @@ export const ExpensebookPage = () => {
         <CreateItemButton onClick={handleCreateButtonClick} />
         <CreateItemDialog />
         <ModifyItemDialog />
+        <DeleteItemDialog />
       </PageBody>
     </>
   );

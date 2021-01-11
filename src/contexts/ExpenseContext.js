@@ -93,7 +93,7 @@ function expenseReducer(state, action) {
       });
     case 'DELETE_ITEM':
       return produce(state, draft => {
-        const targetItemIdx = draft.expense.findIndex(
+        const targetItemIdx = draft.expenses.findIndex(
           item => item.id === action.id
         );
         draft.expenses.splice(targetItemIdx, 1);
