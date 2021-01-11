@@ -21,7 +21,8 @@ export function useInput(initialValue) {
   const handleReset = useCallback(() => {
     setForm(initialValue);
   }, [initialValue]);
-
+  console.log('initialValue', initialValue);
+  console.log('form', form);
   return {
     form,
     setForm,
