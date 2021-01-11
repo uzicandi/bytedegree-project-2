@@ -42,6 +42,7 @@ export const Dialog = ({
   confirmText,
   cancelText,
   children,
+  confirmType,
   onCancel,
   onConfirm,
 }) => {
@@ -57,7 +58,10 @@ export const Dialog = ({
           <Button color="gray" onClick={onCancel}>
             {cancelText}
           </Button>
-          <Button color="pink" onClick={onConfirm}>
+          <Button
+            color={confirmType === 'danger' ? 'pink' : 'indigo'}
+            onClick={onConfirm}
+          >
             {confirmText}
           </Button>
         </ButtonGroup>
